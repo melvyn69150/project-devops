@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  wordpress:
+    image: wordpress:latest
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80"
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - wpnet
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wordpress.rule=Host(`tondomaine.local`)"
+      - "traefik.http.services.wordpress.loadbalancer.server.port=80"
+
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppass
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wpnet
+
+volumes:
+  wordpress_data:
+    driver: local
+  db_data:
+    driver: local
+
+networks:
+  wpnet:
