@@ -18,3 +18,16 @@ scrape_configs:
   - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']
+      
+  scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'cadvisor-nodes'
+    static_configs:
+      - targets:
+          - '10.100.4.107:8080'
+          - '10.100.4.108:8080'
+          - '10.100.4.109:8080'
+'
