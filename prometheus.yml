@@ -18,9 +18,3 @@ scrape_configs:
   - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']
-  - job_name: 'docker-swarm-nodes'
-    static_configs:
-      - targets:
-          - '10.100.4.107:9323'
-          - '10.100.4.108:9323'
-          - '10.100.4.109:9323'
