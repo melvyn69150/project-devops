@@ -2,7 +2,7 @@ name: Build & Deploy ChatPHP
 
 on:
   push:
-    branches: [ "main" ]     # adapte si tu déploies depuis une autre branche
+    branches: [ "chat-php" ]   
     paths:
       - "src/**"
       - "Dockerfile"
@@ -15,7 +15,7 @@ jobs:
       contents: read
 
     env:
-      IMAGE_NAME: ${{ secrets.IMAGE_NAME }}     # ex. melvyn69150/chat-php
+      IMAGE_NAME: ${{ secrets.IMAGE_NAME }}     
       REGISTRY: docker.io
       SHA_TAG: ${{ github.sha }}
       LATEST_TAG: latest
