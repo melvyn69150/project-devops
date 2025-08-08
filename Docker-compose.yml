@@ -1,24 +1,20 @@
 version: "3.8"
 
 services:
-  app:
-    image: mtorres14/chat-php:latest
-    ports:
-      - "8080:80"
+  db:
+    image: mariadb:10.11
     environment:
-      DB_HOST: db
-      DB_NAME: chatdb
-      DB_USER: chatuser
-      DB_PASS: chatpass
+      MYSQL_DATABASE: chatdb
+      MYSQL_USER: chatuser
+      MYSQL_PASSWORD: chatpass
+      MYSQL_ROOT_PASSWORD: rootpass
+    volumes:
+      - /mnt/gfs/chat/db:/var/lib/mysql
     networks:
-      - chat_net
+      - dokploy-network
     deploy:
       replicas: 1
-      placement:
-        constraints: [ "node.role == worker" ]
 
 networks:
-  chat_net:
-    external: true
-
-    
+  dokploy-network:
+    external: true   
