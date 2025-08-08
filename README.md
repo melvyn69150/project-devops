@@ -17,14 +17,12 @@ Chat-PHP/
 ├── docker-compose.yml                               
 │   
 ├── src/
-│   ├── index.php
-│   │   
-│   ├── .github/                      
-│   │   └── workflows/
-│   │       └── deploy.yml            
-│   │
-│   └── Dockerfile                    
-│
-├── README.md                         
+│   ├── index.php 
+├── .github/                      
+│      └── workflows/
+│          └── deploy.yml            
+│                      
+├──  Dockerfile                          
+├── README.md                  
 
 
