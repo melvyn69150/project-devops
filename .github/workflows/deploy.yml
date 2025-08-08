@@ -2,7 +2,7 @@ name: Build & Push ChatPHP
 
 on:
   push:
-    branches: [ "chat-php" ]
+    branches: [ "chat-php" ] #branch
     paths:
       - "src/**"
       - "Dockerfile"
