@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  app:
+    image: mtorres14/chat-php:latest
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_NAME: chatdb
+      DB_USER: chatuser
+      DB_PASS: chatpass
+    networks:
+      - chat_net
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [ "node.role == worker" ]
+
+networks:
+  chat_net:
+    external: true
+
+    
