@@ -1,4 +1,4 @@
-name: Build & Deploy ChatPHP
+name: Build & Push ChatPHP
 
 on:
   push:
@@ -9,11 +9,13 @@ on:
       - ".github/workflows/deploy.yml"
 
 jobs:
-  build_push_deploy:
+  build_push:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     env:
-      IMAGE_NAME: ${{ secrets.IMAGE_NAME }}   # ex. mtorres14/chat-php
+      IMAGE_NAME: ${{ secrets.IMAGE_NAME }}   # ex: mtorres14/chat-php
       REGISTRY: docker.io
       SHA_TAG: ${{ github.sha }}
       LATEST_TAG: latest
@@ -47,8 +49,3 @@ jobs:
           context: .
           file: ./Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
-
-      - name: Trigger Dokploy redeploy via webhook
-        if: ${{ success() }}
-        run: |
-          curl -fsSL -X POST "${{ secrets.DOKPLOY_WEBHOOK_URL }}"
