@@ -58,7 +58,7 @@ jobs:
             GIT_SHA=${{ github.sha }}
 
       - name: Trigger Dokploy redeploy via webhook
-        if: ${{ success() }}
+        if: ${{ success() }} #test
         run: |
           curl -fsSL -X POST "${{ secrets.DOKPLOY_WEBHOOK_URL }}" \
           -H "Content-Type: application/json" \
